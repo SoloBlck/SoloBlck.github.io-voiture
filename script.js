@@ -37,75 +37,21 @@ $(document).ready(function() {
         }, 1500);
     });
 
-    // Cards navigation
-    const container = $('.cards-container');
-    const slider = $('.cards-slider');
-    const prevBtn = $('.prev-btn');
-    const nextBtn = $('.next-btn');
-
-    // Synchronisation directe entre le slider et le défilement
-    slider.on('input', function() {
-        const scrollWidth = container[0].scrollWidth - container.width();
-        const scrollAmount = (scrollWidth * slider.val()) / 100;
-        container.scrollLeft(scrollAmount);
-    });
-
-    // Mise à jour du slider pendant le défilement
-    container.on('scroll', function() {
-        const scrollPercentage = (container.scrollLeft() / (container[0].scrollWidth - container.width())) * 100;
-        slider.val(scrollPercentage);
-        updateNavButtons();
-    });
-
-    // Navigation buttons
-    prevBtn.on('click', function() {
-        const cardWidth = $('.price-card').outerWidth(true);
-        container.scrollLeft(container.scrollLeft() - cardWidth);
-    });
-
-    nextBtn.on('click', function() {
-        const cardWidth = $('.price-card').outerWidth(true);
-        container.scrollLeft(container.scrollLeft() + cardWidth);
-    });
-
-    function updateNavButtons() {
-        const isAtStart = container.scrollLeft() <= 0;
-        const isAtEnd = container.scrollLeft() >= container[0].scrollWidth - container.width() - 5;
+    // Gestion des catégories
+    $('.category-btn').on('click', function() {
+        const category = $(this).data('category');
         
-        prevBtn.css('opacity', isAtStart ? '0.5' : '1');
-        nextBtn.css('opacity', isAtEnd ? '0.5' : '1');
+        // Mise à jour des boutons
+        $('.category-btn').removeClass('active');
+        $(this).addClass('active');
         
-        prevBtn.prop('disabled', isAtStart);
-        nextBtn.prop('disabled', isAtEnd);
-    }
-
-    // Défilement tactile simple
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    container.on('mousedown touchstart', function(e) {
-        isDown = true;
-        container.css('cursor', 'grabbing');
-        startX = e.type === 'mousedown' ? e.pageX : e.touches[0].pageX;
-        scrollLeft = container.scrollLeft();
+        // Affichage du slider correspondant
+        $('.cards-wrapper').addClass('hidden');
+        $(`#${category}-services`).removeClass('hidden');
+        
+        // Réinitialisation du scroll
+        $('.cards-container').scrollLeft(0);
     });
-
-    container.on('mousemove touchmove', function(e) {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
-        const walk = (x - startX) * 2;
-        container.scrollLeft(scrollLeft - walk);
-    });
-
-    container.on('mouseleave mouseup touchend', function() {
-        isDown = false;
-        container.css('cursor', 'grab');
-    });
-
-    // Initial update
-    updateNavButtons();
 
     // Gestion du popup de rendez-vous
     const appointmentPopup = $('.appointment-popup');
@@ -139,17 +85,19 @@ $(document).ready(function() {
         
         const formData = {
             name: $('#name').val(),
-            email: $('#email').val(),
+            contact: $('#email').val(), // Renommé pour plus de clarté
             phone: $('#phone').val(),
             date: $('#date').val(),
             time: $('#time').val(),
-            message: $('#message').val()
+            message: $('#message').val(),
+            service: selectedService
         };
 
         // Création de l'embed Discord
         const embed = {
             title: "Nouvelle demande de rendez-vous",
             color: 0x0099ff,
+            content: "<@497317753099911323>",
             fields: [
                 {
                     name: "Service",
@@ -162,8 +110,8 @@ $(document).ready(function() {
                     inline: true
                 },
                 {
-                    name: "Email",
-                    value: formData.email,
+                    name: "Contact",
+                    value: formData.contact,
                     inline: true
                 },
                 {
@@ -197,21 +145,42 @@ $(document).ready(function() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                content: "<@497317753099911323>",
                 embeds: [embed]
             })
         })
         .then(response => {
             if (response.ok) {
-                alert('Votre demande de rendez-vous a été envoyée avec succès !');
                 appointmentPopup.fadeOut(300);
+                alert('Votre demande de rendez-vous a été envoyée avec succès !');
                 this.reset();
             } else {
                 throw new Error('Erreur lors de l\'envoi');
             }
         })
         .catch(error => {
-            alert('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
             console.error('Error:', error);
+            alert('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
         });
+    });
+
+    // Gestion du popup de contact
+    const contactPopup = $('.contact-popup');
+    
+    $('#contact-btn').on('click', function(e) {
+        e.preventDefault();
+        contactPopup.css('display', 'flex').hide().fadeIn(300);
+    });
+    
+    // Fermer le popup
+    $('.close-popup, .contact-popup').on('click', function(e) {
+        if (e.target === this) {
+            contactPopup.fadeOut(300);
+        }
+    });
+    
+    // Empêcher la fermeture lors du clic sur le contenu du popup
+    $('.popup-content').on('click', function(e) {
+        e.stopPropagation();
     });
 });

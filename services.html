@@ -5,9 +5,20 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').hide();
+            setTimeout(function() {
+                $('body').fadeIn(1000);
+            }, 500);
+        });
+    </script>
 </head>
 <body>
     <div class="page-content">
+        <div class="back-link-container">
+            <span class="back-link-text"><a href="index.html" class="back-link">[retour à l'accueil]</a></span>
+        </div>
         <div id="title">
             <a href="/" class="hidden">Pacific Lex</a>
         </div>
@@ -15,78 +26,170 @@
         <div class="pricing-cards">
             <h2>Tarifs et services</h2>
             
-            <div class="cards-wrapper">
-                <button class="nav-btn prev-btn">❮</button>
+            <div class="category-selector">
+                <button class="category-btn active" data-category="particuliers">Particuliers</button>
+                <button class="category-btn" data-category="entreprises">Entreprises</button>
+            </div>
+
+            <div class="cards-wrapper" id="particuliers-services">
                 <div class="cards-container">
+                    
+                    <!-- Consultation Juridique -->
                     <div class="price-card">
-                        <h3>Consultation initiale</h3>
-                        <p class="description">Premier rendez-vous et évaluation du dossier</p>
+                        <h3>Consultation juridique*</h3>
+                        <p class="description">Évaluation de votre situation et conseils</p>
                         <div class="price">
-                            <span class="amount">150</span>
-                            <span class="currency">€</span>
+                            <span class="amount">2 500</span>
+                            <span class="currency">$</span>
                             <span class="period">/heure</span>
                         </div>
-                        <p class="tax-info">Le prix inclut la TVA</p>
                         <button class="select-btn">Sélectionner</button>
                     </div>
-
+            
+                    <!-- Défense en Droit Pénal -->
                     <div class="price-card popular">
                         <div class="popular-tag">LE PLUS POPULAIRE</div>
-                        <h3>Représentation en justice</h3>
-                        <p class="description">Préparation et présence aux audiences</p>
+                        <h3>Défense en droit pénal*</h3>
+                        <p class="description">Litiges avec implication du ministère publique</p>
                         <div class="price">
-                            <span class="amount">250</span>
-                            <span class="currency">€</span>
+                            <span class="amount">10 000-100 000</span>
+                            <span class="currency">$</span>
                             <span class="period">/heure</span>
                         </div>
-                        <p class="tax-info">Le prix inclut la TVA</p>
                         <button class="select-btn">Sélectionner</button>
                     </div>
-
+                    
+                    <!-- Défense en Droit Civil -->
                     <div class="price-card">
-                        <h3>Rédaction juridique</h3>
-                        <p class="description">Contrats, conclusions, mémoires</p>
+                        <h3>Défense en droit civil*</h3>
+                        <p class="description">Litiges entre citoyens</p>
                         <div class="price">
-                            <span class="amount">200</span>
-                            <span class="currency">€</span>
+                            <span class="amount">8 000</span>
+                            <span class="currency">$</span>
                             <span class="period">/heure</span>
                         </div>
-                        <p class="tax-info">Le prix inclut la TVA</p>
                         <button class="select-btn">Sélectionner</button>
                     </div>
-
+                    
+                    <!-- Médiation -->
                     <div class="price-card">
-                        <h3>Médiation</h3>
+                        <h3>Médiation juridique*</h3>
                         <p class="description">Résolution amiable des conflits</p>
                         <div class="price">
-                            <span class="amount">180</span>
-                            <span class="currency">€</span>
+                            <span class="amount">7 500</span>
+                            <span class="currency">$</span>
                             <span class="period">/heure</span>
                         </div>
-                        <p class="tax-info">Le prix inclut la TVA</p>
                         <button class="select-btn">Sélectionner</button>
                     </div>
-
+            
+                    <!-- Droit Familial -->
                     <div class="price-card">
-                        <h3>Forfait PME</h3>
-                        <p class="description">Conseil juridique mensuel</p>
+                        <h3>Droit familial*</h3>
+                        <p class="description">Divorce, garde, pension alimentaire</p>
                         <div class="price">
-                            <span class="amount">500</span>
-                            <span class="currency">€</span>
-                            <span class="period">/mois</span>
+                            <span class="amount">9 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
                         </div>
-                        <p class="tax-info">Le prix inclut la TVA</p>
                         <button class="select-btn">Sélectionner</button>
                     </div>
+            
+                    <!-- Défense Contre Abus Policiers -->
+                    <div class="price-card">
+                        <h3>Défense contre abus policiers*</h3>
+                        <p class="description">Contestations d'arrestations ou d'amendes</p>
+                        <div class="price">
+                            <span class="amount">12 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                    <!-- Gestion des Infractions de Stationnement -->
+                    <div class="price-card">
+                        <h3>Infractions de stationnement*</h3>
+                        <p class="description">Contestations et négociations</p>
+                        <div class="price">
+                            <span class="amount">5 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/cas</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
                 </div>
-                <button class="nav-btn next-btn">❯</button>
+            </div>
+
+            <div class="cards-wrapper hidden" id="entreprises-services">
+                <div class="cards-container">
+                    
+                    <!-- Droit Commercial -->
+                    <div class="price-card">
+                        <h3>Droit commercial*</h3>
+                        <p class="description">Litiges entre entreprises</p>
+                        <div class="price">
+                            <span class="amount">12 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                    <!-- Rédaction Juridique -->
+                    <div class="price-card">
+                        <h3>Rédaction juridique*</h3>
+                        <p class="description">Contrats commerciaux, documents légaux</p>
+                        <div class="price">
+                            <span class="amount">20 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/document</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                    <!-- Droit des Affaires -->
+                    <div class="price-card">
+                        <h3>Droit des affaires*</h3>
+                        <p class="description">Création d'entreprises et litiges commerciaux</p>
+                        <div class="price">
+                            <span class="amount">25 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                    <!-- Accompagnement en Affaires Immobilières -->
+                    <div class="price-card">
+                        <h3>Affaires immobilières*</h3>
+                        <p class="description">Transactions et litiges immobiliers</p>
+                        <div class="price">
+                            <span class="amount">15 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                    <!-- Contestation de Licenciement -->
+                    <div class="price-card">
+                        <h3>Licenciement abusif*</h3>
+                        <p class="description">Défense en cas de renvoi injustifié</p>
+                        <div class="price">
+                            <span class="amount">10 000</span>
+                            <span class="currency">$</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+            
+                </div>
             </div>
             
-            <div class="slider-container">
-                <input type="range" class="cards-slider" min="0" max="100" value="0">
-            </div>
-        </div>
-
+            <p class="conditions-note">* Les modalités de chaque service sont sous conditions à voir avec l'avocat</p>
+            
                 <div class="appointment-popup">
                     <div class="popup-content">
                         <button class="close-popup">&times;</button>
@@ -95,15 +198,15 @@
                         <form id="appointment-form">
                             <div class="form-group">
                                 <label for="name">Nom complet</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <label for="email">Contact (Discord, Email, etc.)</label>
+                                <input type="text" id="email" name="email" placeholder="Discord ou Email" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Téléphone</label>
-                                <input type="tel" id="phone" name="phone" required>
+                                <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78" required>
                             </div>
                             <div class="form-group">
                                 <label for="date">Date souhaitée</label>
@@ -115,7 +218,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="message">Message (optionnel)</label>
-                                <textarea id="message" name="message" rows="3"></textarea>
+                                <textarea id="message" name="message" placeholder="Décrivez brièvement votre situation..." rows="3"></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Envoyer la demande</button>
                         </form>
