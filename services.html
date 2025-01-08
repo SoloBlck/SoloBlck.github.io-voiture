@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Services - Pacific Lex</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="page-content">
+        <div id="title">
+            <a href="/" class="hidden">Pacific Lex</a>
+        </div>
+
+        <div class="pricing-cards">
+            <h2>Tarifs et services</h2>
+            
+            <div class="cards-wrapper">
+                <button class="nav-btn prev-btn">❮</button>
+                <div class="cards-container">
+                    <div class="price-card">
+                        <h3>Consultation initiale</h3>
+                        <p class="description">Premier rendez-vous et évaluation du dossier</p>
+                        <div class="price">
+                            <span class="amount">150</span>
+                            <span class="currency">€</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <p class="tax-info">Le prix inclut la TVA</p>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+
+                    <div class="price-card popular">
+                        <div class="popular-tag">LE PLUS POPULAIRE</div>
+                        <h3>Représentation en justice</h3>
+                        <p class="description">Préparation et présence aux audiences</p>
+                        <div class="price">
+                            <span class="amount">250</span>
+                            <span class="currency">€</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <p class="tax-info">Le prix inclut la TVA</p>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+
+                    <div class="price-card">
+                        <h3>Rédaction juridique</h3>
+                        <p class="description">Contrats, conclusions, mémoires</p>
+                        <div class="price">
+                            <span class="amount">200</span>
+                            <span class="currency">€</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <p class="tax-info">Le prix inclut la TVA</p>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+
+                    <div class="price-card">
+                        <h3>Médiation</h3>
+                        <p class="description">Résolution amiable des conflits</p>
+                        <div class="price">
+                            <span class="amount">180</span>
+                            <span class="currency">€</span>
+                            <span class="period">/heure</span>
+                        </div>
+                        <p class="tax-info">Le prix inclut la TVA</p>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+
+                    <div class="price-card">
+                        <h3>Forfait PME</h3>
+                        <p class="description">Conseil juridique mensuel</p>
+                        <div class="price">
+                            <span class="amount">500</span>
+                            <span class="currency">€</span>
+                            <span class="period">/mois</span>
+                        </div>
+                        <p class="tax-info">Le prix inclut la TVA</p>
+                        <button class="select-btn">Sélectionner</button>
+                    </div>
+                </div>
+                <button class="nav-btn next-btn">❯</button>
+            </div>
+            
+            <div class="slider-container">
+                <input type="range" class="cards-slider" min="0" max="100" value="0">
+            </div>
+        </div>
+
+                <div class="appointment-popup">
+                    <div class="popup-content">
+                        <button class="close-popup">&times;</button>
+                        <h3>Prendre rendez-vous</h3>
+                        <p class="selected-service"></p>
+                        <form id="appointment-form">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date souhaitée</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Heure souhaitée</label>
+                                <input type="time" id="time" name="time" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message (optionnel)</label>
+                                <textarea id="message" name="message" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Envoyer la demande</button>
+                        </form>
+                    </div>
+                </div>
+    
+        <div id="footer">
+            <a href="#" id="cgu">CGU</a> - <span class="author">Victor novikov</span>
+        </div>
+    </div>
+</body>
+</html>
