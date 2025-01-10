@@ -140,13 +140,20 @@ body {
 }
 
 #title {
-    color: black;
-    font-size: 2em;
-    margin: 1em 0;
+    font-size: 3em;
+    margin-bottom: 1em;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+#title a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    text-shadow: 0 0 1px rgba(44, 82, 130, 0.2),
+                 0 0 2px rgba(44, 82, 130, 0.1);
+}
+
+#title a:hover {
+    color: var(--primary-blue-hover);
 }
 
 .back-link-container {
@@ -353,27 +360,74 @@ a.hidden:active {
 }
 
 .price-card.popular {
+    position: relative;
+    border: none;
+    background: white;
+    border-radius: 15px;
+}
+
+.price-card.popular::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: 1;
     border: 2px solid var(--primary-blue);
-    margin-top: 0;
+    clip-path: circle(0% at 80% 0);
+    transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-card.popular:hover::before {
+    clip-path: circle(150% at 80% 0);
 }
 
 .popular-tag {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--primary-blue);
+    top: -15px;
+    right: 20px;
+    background: linear-gradient(45deg, var(--primary-blue), #4299e1);
     color: white;
-    padding: 0.5em 1em;
-    border-radius: 20px;
+    padding: 5px 15px;
+    border-radius: 15px;
     font-size: 0.8em;
-    white-space: nowrap;
-    z-index: 1;
+    font-weight: bold;
+    transform-origin: center;
+    z-index: 2;
+    transition: all 0.3s ease;
 }
 
-.price-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(44, 82, 130, 0.2);
+.popular-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    border-radius: 15px;
+}
+
+.price-card.popular:hover .popular-tag {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(44, 82, 130, 0.3);
+}
+
+.price-card.popular:hover .popular-tag::before {
+    transform: translateX(100%);
+}
+
+.price-card.popular .price,
+.price-card.popular h3,
+.price-card.popular .description,
+.price-card.popular .select-btn {
+    position: relative;
+    z-index: 1;
 }
 
 .price-card h3 {
@@ -453,6 +507,61 @@ a.hidden:active {
 .select-btn:hover {
     background: var(--link-color);
     color: white;
+}
+
+.price-card.popular .select-btn {
+    position: relative;
+    overflow: hidden;
+    animation: buttonFloat 3s ease-in-out infinite;
+    background: linear-gradient(45deg, var(--primary-blue), #4299e1);
+    border: none;
+    color: white;
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.2);
+}
+
+.price-card.popular .select-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: buttonShine 3s infinite;
+}
+
+@keyframes buttonFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-3px) scale(1.02);
+    }
+}
+
+@keyframes buttonShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.price-card.popular .select-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(44, 82, 130, 0.3);
+    background: linear-gradient(45deg, #4299e1, var(--primary-blue));
+}
+
+.price-card.popular .select-btn:hover::before {
+    animation: buttonShine 1s;
 }
 
 .popular .select-btn {
@@ -789,94 +898,4 @@ textarea::placeholder {
     opacity: 0.6;
 }
 
-.balance-container {
-    margin-bottom: 20px;
-}
-
-.balance {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.balance-beam {
-    width: 80px;
-    height: 4px;
-    background: #2c5282;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform-origin: center;
-    transform: translateX(-50%);
-    animation: tilt 3s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
-}
-
-.balance-stand {
-    width: 4px;
-    height: 40px;
-    background: #2c5282;
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
-}
-
-.scale {
-    position: absolute;
-    top: 30%;
-}
-
-.scale::before {
-    content: '';
-    width: 2px;
-    height: 20px;
-    background: #2c5282;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
-}
-
-.scale::after {
-    content: '';
-    width: 15px;
-    height: 15px;
-    background: #2c5282;
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
-}
-
-.scale.left {
-    left: 10px;
-    transform-origin: top right;
-    animation: tiltLeft 3s ease-in-out infinite;
-}
-
-.scale.right {
-    right: 10px;
-    transform-origin: top left;
-    animation: tiltRight 3s ease-in-out infinite;
-}
-
-@keyframes tilt {
-    0%, 100% { transform: translateX(-50%) rotate(-8deg); }
-    50% { transform: translateX(-50%) rotate(8deg); }
-}
-
-@keyframes tiltLeft {
-    0%, 100% { transform: rotate(8deg); }
-    50% { transform: rotate(-8deg); }
-}
-
-@keyframes tiltRight {
-    0%, 100% { transform: rotate(-8deg); }
-    50% { transform: rotate(8deg); }
-}
+/* Suppression des styles de la balance */
