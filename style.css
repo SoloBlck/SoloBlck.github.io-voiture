@@ -645,13 +645,12 @@ a.hidden:active {
     max-width: 800px;
     margin: 0 auto;
     padding: 2em;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .about-content {
-    background: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2em;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .about-text {
@@ -788,4 +787,96 @@ input::placeholder,
 textarea::placeholder {
     color: #999;
     opacity: 0.6;
+}
+
+.balance-container {
+    margin-bottom: 20px;
+}
+
+.balance {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.balance-beam {
+    width: 80px;
+    height: 4px;
+    background: #2c5282;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform-origin: center;
+    transform: translateX(-50%);
+    animation: tilt 3s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
+}
+
+.balance-stand {
+    width: 4px;
+    height: 40px;
+    background: #2c5282;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
+}
+
+.scale {
+    position: absolute;
+    top: 30%;
+}
+
+.scale::before {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background: #2c5282;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
+}
+
+.scale::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: #2c5282;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
+}
+
+.scale.left {
+    left: 10px;
+    transform-origin: top right;
+    animation: tiltLeft 3s ease-in-out infinite;
+}
+
+.scale.right {
+    right: 10px;
+    transform-origin: top left;
+    animation: tiltRight 3s ease-in-out infinite;
+}
+
+@keyframes tilt {
+    0%, 100% { transform: translateX(-50%) rotate(-8deg); }
+    50% { transform: translateX(-50%) rotate(8deg); }
+}
+
+@keyframes tiltLeft {
+    0%, 100% { transform: rotate(8deg); }
+    50% { transform: rotate(-8deg); }
+}
+
+@keyframes tiltRight {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
 }
